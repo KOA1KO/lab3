@@ -1,5 +1,4 @@
-from tkinter import *
-from tkinter import ttk
+from tkinter import StringVar, PhotoImage, Label, Tk, ttk
 from random import randint, shuffle
 
 params = {"title": "KeyGen228", "winsize": "400x400+1+10", "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}
@@ -29,7 +28,7 @@ label.pack()
 label1.pack(pady=30)
 
 
-def generate():
+def generate(KEY, copytxt):
     SHUFFLED_KEYLIST = ''
     for forth_gen in range(4):
         KEYLIST = []
@@ -46,16 +45,17 @@ def generate():
     copytxt.set(value=copy_btn_txt)
 
 
-def copytext():
+def copytext(root):
     root.clipboard_clear()
     root.clipboard_append(label1['text'])
     copytxt.set(value='Copied!')
 
 
-gen_btn = ttk.Button(text="Generate", padding=5, command=generate)
-copy_btn = ttk.Button(textvariable=copytxt, padding=5, command=copytext)
+gen_btn = ttk.Button(text="Generate", padding=5, command=lambda: generate(KEY, copytxt))
+copy_btn = ttk.Button(textvariable=copytxt, padding=5, command=lambda: copytext(root))
 
 gen_btn.pack()
 copy_btn.pack()
 
-root.mainloop()
+if __name__ == '__main__':
+    root.mainloop()
